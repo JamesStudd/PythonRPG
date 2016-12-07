@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="64" height="64" tilewidth="50" tileheight="50" nextobjectid="1">
+ <tileset firstgid="1" name="Mountain and GrassTEMP" tilewidth="50" tileheight="50">
+  <image source="TS/Mountain and GrassTEMP.png" trans="ff00ff" width="500" height="200"/>
+ </tileset>
+ <tileset firstgid="41" name="Red House" tilewidth="50" tileheight="50">
+  <tile id="0">
+   <image width="50" height="50" source="TS/Houses/Red House/Chimney/Chimney Bottom Left.png"/>
+  </tile>
+  <tile id="1">
+   <image width="50" height="50" source="TS/Houses/Red House/Chimney/Chimney Bottom Right.png"/>
+  </tile>
+  <tile id="2">
+   <image width="50" height="50" source="TS/Houses/Red House/Chimney/Chimney Center Bottom.png"/>
+  </tile>
+  <tile id="3">
+   <image width="50" height="50" source="TS/Houses/Red House/Chimney/Chimney Center Left.png"/>
+  </tile>
+  <tile id="4">
+   <image width="50" height="50" source="TS/Houses/Red House/Chimney/Chimney Center Right.png"/>
+  </tile>
+  <tile id="5">
+   <image width="50" height="50" source="TS/Houses/Red House/Chimney/Chimney Center Top.png"/>
+  </tile>
+  <tile id="6">
+   <image width="50" height="50" source="TS/Houses/Red House/Chimney/Chimney Center.png"/>
+  </tile>
+  <tile id="7">
+   <image width="50" height="50" source="TS/Houses/Red House/Chimney/Chimney Top Left.png"/>
+  </tile>
+  <tile id="8">
+   <image width="50" height="50" source="TS/Houses/Red House/Chimney/Chimney Top Right.png"/>
+  </tile>
+  <tile id="9">
+   <properties>
+    <property name="Transition" value="1"/>
+   </properties>
+   <image width="50" height="50" source="TS/Houses/Red House/Door/Door Full.png"/>
+  </tile>
+  <tile id="10">
+   <image width="50" height="50" source="TS/Houses/Red House/Door/Door Left.png"/>
+  </tile>
+  <tile id="11">
+   <image width="50" height="50" source="TS/Houses/Red House/Door/Door Right.png"/>
+  </tile>
+  <tile id="12">
+   <image width="50" height="50" source="TS/Houses/Red House/Front Roof to Extend/Roof Bottom Left.png"/>
+  </tile>
+  <tile id="13">
+   <image width="50" height="50" source="TS/Houses/Red House/Front Roof to Extend/Roof Bottom Mid.png"/>
+  </tile>
+  <tile id="14">
+   <image width="50" height="50" source="TS/Houses/Red House/Front Roof to Extend/Roof Bottom Right.png"/>
+  </tile>
+  <tile id="15">
+   <image width="50" height="50" source="TS/Houses/Red House/Front Roof to Extend/Roof Middle Left.png"/>
+  </tile>
+  <tile id="16">
+   <image width="50" height="50" source="TS/Houses/Red House/Front Roof to Extend/Roof Middle Mid.png"/>
+  </tile>
+  <tile id="17">
+   <image width="50" height="50" source="TS/Houses/Red House/Front Roof to Extend/Roof Middle Right.png"/>
+  </tile>
+  <tile id="18">
+   <image width="50" height="50" source="TS/Houses/Red House/Front Roof to Extend/Roof Top Left.png"/>
+  </tile>
+  <tile id="19">
+   <image width="50" height="50" source="TS/Houses/Red House/Front Roof to Extend/Roof Top Mid.png"/>
+  </tile>
+  <tile id="20">
+   <image width="50" height="50" source="TS/Houses/Red House/Front Roof to Extend/Roof Top Right.png"/>
+  </tile>
+  <tile id="21">
+   <image width="50" height="50" source="TS/Houses/Red House/Roof/Back Roof Left.png"/>
+  </tile>
+  <tile id="22">
+   <image width="50" height="50" source="TS/Houses/Red House/Roof/Back Roof Right.png"/>
+  </tile>
+  <tile id="23">
+   <image width="50" height="50" source="TS/Houses/Red House/Roof/Back Roof.png"/>
+  </tile>
+  <tile id="24">
+   <image width="50" height="50" source="TS/Houses/Red House/Roof/Front Roof Left.png"/>
+  </tile>
+  <tile id="25">
+   <image width="50" height="50" source="TS/Houses/Red House/Roof/Front Roof Right.png"/>
+  </tile>
+  <tile id="26">
+   <image width="50" height="50" source="TS/Houses/Red House/Roof/Front Roof.png"/>
+  </tile>
+  <tile id="27">
+   <image width="50" height="50" source="TS/Houses/Red House/Walls/Wall Left.png"/>
+  </tile>
+  <tile id="28">
+   <image width="50" height="50" source="TS/Houses/Red House/Walls/Wall Right.png"/>
+  </tile>
+  <tile id="29">
+   <image width="50" height="50" source="TS/Houses/Red House/Walls/Wall.png"/>
+  </tile>
+  <tile id="30">
+   <image width="50" height="50" source="TS/Houses/Red House/Windows/Window Center Left.png"/>
+  </tile>
+  <tile id="31">
+   <image width="50" height="50" source="TS/Houses/Red House/Windows/Window Center Right.png"/>
+  </tile>
+  <tile id="32">
+   <image width="50" height="50" source="TS/Houses/Red House/Windows/Window Centered.png"/>
+  </tile>
+  <tile id="33">
+   <image width="50" height="50" source="TS/Houses/Red House/Windows/Window High Left.png"/>
+  </tile>
+  <tile id="34">
+   <image width="50" height="50" source="TS/Houses/Red House/Windows/Window High Right.png"/>
+  </tile>
+  <tile id="35">
+   <image width="50" height="50" source="TS/Houses/Red House/Windows/Window High.png"/>
+  </tile>
+  <tile id="36">
+   <image width="50" height="50" source="TS/Houses/Red House/Windows/Window Low Left.png"/>
+  </tile>
+  <tile id="37">
+   <image width="50" height="50" source="TS/Houses/Red House/Windows/Window Low Right.png"/>
+  </tile>
+  <tile id="38">
+   <image width="50" height="50" source="TS/Houses/Red House/Windows/Window Low.png"/>
+  </tile>
+ </tileset>
+ <tileset firstgid="80" name="Blue H" tilewidth="50" tileheight="50">
+  <tile id="0">
+   <image width="50" height="50" source="TS/Houses/Blue House/Windows/Window Center Left.png"/>
+  </tile>
+  <tile id="1">
+   <image width="50" height="50" source="TS/Houses/Blue House/Windows/Window Center Right.png"/>
+  </tile>
+  <tile id="2">
+   <image width="50" height="50" source="TS/Houses/Blue House/Windows/Window Centered.png"/>
+  </tile>
+  <tile id="3">
+   <image width="50" height="50" source="TS/Houses/Blue House/Windows/Window High Left.png"/>
+  </tile>
+  <tile id="4">
+   <image width="50" height="50" source="TS/Houses/Blue House/Windows/Window High Right.png"/>
+  </tile>
+  <tile id="5">
+   <image width="50" height="50" source="TS/Houses/Blue House/Windows/Window High.png"/>
+  </tile>
+  <tile id="6">
+   <image width="50" height="50" source="TS/Houses/Blue House/Windows/Window Low Left.png"/>
+  </tile>
+  <tile id="7">
+   <image width="50" height="50" source="TS/Houses/Blue House/Windows/Window Low Right.png"/>
+  </tile>
+  <tile id="8">
+   <image width="50" height="50" source="TS/Houses/Blue House/Windows/Window Low.png"/>
+  </tile>
+  <tile id="9">
+   <image width="50" height="50" source="TS/Houses/Blue House/Walls/Wall Left.png"/>
+  </tile>
+  <tile id="10">
+   <image width="50" height="50" source="TS/Houses/Blue House/Walls/Wall Right.png"/>
+  </tile>
+  <tile id="11">
+   <image width="50" height="50" source="TS/Houses/Blue House/Walls/Wall.png"/>
+  </tile>
+  <tile id="12">
+   <image width="50" height="50" source="TS/Houses/Blue House/Roof/Back Roof Left.png"/>
+  </tile>
+  <tile id="13">
+   <image width="50" height="50" source="TS/Houses/Blue House/Roof/Back Roof Right.png"/>
+  </tile>
+  <tile id="14">
+   <image width="50" height="50" source="TS/Houses/Blue House/Roof/Back Roof.png"/>
+  </tile>
+  <tile id="15">
+   <image width="50" height="50" source="TS/Houses/Blue House/Roof/Front Roof Left.png"/>
+  </tile>
+  <tile id="16">
+   <image width="50" height="50" source="TS/Houses/Blue House/Roof/Front Roof Right.png"/>
+  </tile>
+  <tile id="17">
+   <image width="50" height="50" source="TS/Houses/Blue House/Roof/Front Roof.png"/>
+  </tile>
+  <tile id="18">
+   <image width="50" height="50" source="TS/Houses/Blue House/Door/Door Full.png"/>
+  </tile>
+  <tile id="19">
+   <image width="50" height="50" source="TS/Houses/Blue House/Door/Door Left.png"/>
+  </tile>
+  <tile id="20">
+   <image width="50" height="50" source="TS/Houses/Blue House/Door/Door Right.png"/>
+  </tile>
+ </tileset>
+ <tileset firstgid="101" name="Green H" tilewidth="50" tileheight="50">
+  <tile id="0">
+   <properties>
+    <property name="Transition" value="1"/>
+   </properties>
+   <image width="50" height="50" source="TS/Houses/Green House/Door/Door Full.png"/>
+  </tile>
+  <tile id="1">
+   <image width="50" height="50" source="TS/Houses/Green House/Door/Door Left.png"/>
+  </tile>
+  <tile id="2">
+   <image width="50" height="50" source="TS/Houses/Green House/Door/Door Right.png"/>
+  </tile>
+  <tile id="3">
+   <image width="50" height="50" source="TS/Houses/Green House/Roof/Back Roof Left.png"/>
+  </tile>
+  <tile id="4">
+   <image width="50" height="50" source="TS/Houses/Green House/Roof/Back Roof Right.png"/>
+  </tile>
+  <tile id="5">
+   <image width="50" height="50" source="TS/Houses/Green House/Roof/Back Roof.png"/>
+  </tile>
+  <tile id="6">
+   <image width="50" height="50" source="TS/Houses/Green House/Roof/Front Roof Left.png"/>
+  </tile>
+  <tile id="7">
+   <image width="50" height="50" source="TS/Houses/Green House/Roof/Front Roof Right.png"/>
+  </tile>
+  <tile id="8">
+   <image width="50" height="50" source="TS/Houses/Green House/Roof/Front Roof.png"/>
+  </tile>
+  <tile id="9">
+   <image width="50" height="50" source="TS/Houses/Green House/Walls/Wall Left.png"/>
+  </tile>
+  <tile id="10">
+   <image width="50" height="50" source="TS/Houses/Green House/Walls/Wall Right.png"/>
+  </tile>
+  <tile id="11">
+   <image width="50" height="50" source="TS/Houses/Green House/Walls/Wall.png"/>
+  </tile>
+  <tile id="12">
+   <image width="50" height="50" source="TS/Houses/Green House/Windows/Window Center Left.png"/>
+  </tile>
+  <tile id="13">
+   <image width="50" height="50" source="TS/Houses/Green House/Windows/Window Center Right.png"/>
+  </tile>
+  <tile id="14">
+   <image width="50" height="50" source="TS/Houses/Green House/Windows/Window Centered.png"/>
+  </tile>
+  <tile id="15">
+   <image width="50" height="50" source="TS/Houses/Green House/Windows/Window High Left.png"/>
+  </tile>
+  <tile id="16">
+   <image width="50" height="50" source="TS/Houses/Green House/Windows/Window High Right.png"/>
+  </tile>
+  <tile id="17">
+   <image width="50" height="50" source="TS/Houses/Green House/Windows/Window High.png"/>
+  </tile>
+  <tile id="18">
+   <image width="50" height="50" source="TS/Houses/Green House/Windows/Window Low Left.png"/>
+  </tile>
+  <tile id="19">
+   <image width="50" height="50" source="TS/Houses/Green House/Windows/Window Low Right.png"/>
+  </tile>
+  <tile id="20">
+   <image width="50" height="50" source="TS/Houses/Green House/Windows/Window Low.png"/>
+  </tile>
+ </tileset>
+ <tileset firstgid="122" name="Yellow H" tilewidth="50" tileheight="50">
+  <tile id="0">
+   <image width="50" height="50" source="TS/Houses/Yellow House/Windows/Window Center Left.png"/>
+  </tile>
+  <tile id="1">
+   <image width="50" height="50" source="TS/Houses/Yellow House/Windows/Window Center Right.png"/>
+  </tile>
+  <tile id="2">
+   <image width="50" height="50" source="TS/Houses/Yellow House/Windows/Window Centered.png"/>
+  </tile>
+  <tile id="3">
+   <image width="50" height="50" source="TS/Houses/Yellow House/Windows/Window High Left.png"/>
+  </tile>
+  <tile id="4">
+   <image width="50" height="50" source="TS/Houses/Yellow House/Windows/Window High Right.png"/>
+  </tile>
+  <tile id="5">
+   <image width="50" height="50" source="TS/Houses/Yellow House/Windows/Window High.png"/>
+  </tile>
+  <tile id="6">
+   <image width="50" height="50" source="TS/Houses/Yellow House/Windows/Window Low Left.png"/>
+  </tile>
+  <tile id="7">
+   <image width="50" height="50" source="TS/Houses/Yellow House/Windows/Window Low Right.png"/>
+  </tile>
+  <tile id="8">
+   <image width="50" height="50" source="TS/Houses/Yellow House/Windows/Window Low.png"/>
+  </tile>
+  <tile id="9">
+   <image width="50" height="50" source="TS/Houses/Yellow House/Walls/Wall Left.png"/>
+  </tile>
+  <tile id="10">
+   <image width="50" height="50" source="TS/Houses/Yellow House/Walls/Wall Right.png"/>
+  </tile>
+  <tile id="11">
+   <image width="50" height="50" source="TS/Houses/Yellow House/Walls/Wall.png"/>
+  </tile>
+  <tile id="12">
+   <image width="50" height="50" source="TS/Houses/Yellow House/Roof/Back Roof Left.png"/>
+  </tile>
+  <tile id="13">
+   <image width="50" height="50" source="TS/Houses/Yellow House/Roof/Back Roof Right.png"/>
+  </tile>
+  <tile id="14">
+   <image width="50" height="50" source="TS/Houses/Yellow House/Roof/Back Roof.png"/>
+  </tile>
+  <tile id="15">
+   <image width="50" height="50" source="TS/Houses/Yellow House/Roof/Front Roof Left.png"/>
+  </tile>
+  <tile id="16">
+   <image width="50" height="50" source="TS/Houses/Yellow House/Roof/Front Roof Right.png"/>
+  </tile>
+  <tile id="17">
+   <image width="50" height="50" source="TS/Houses/Yellow House/Roof/Front Roof.png"/>
+  </tile>
+  <tile id="18">
+   <image width="50" height="50" source="TS/Houses/Yellow House/Door/Door Full.png"/>
+  </tile>
+  <tile id="19">
+   <image width="50" height="50" source="TS/Houses/Yellow House/Door/Door Left.png"/>
+  </tile>
+  <tile id="20">
+   <image width="50" height="50" source="TS/Houses/Yellow House/Door/Door Right.png"/>
+  </tile>
+ </tileset>
+ <tileset firstgid="143" name="Water3" tilewidth="50" tileheight="50">
+  <image source="TS/Water3.png" trans="ff00ff" width="250" height="200"/>
+ </tileset>
+ <layer name="Background" width="64" height="64">
+  <data encoding="base64" compression="zlib">
+   eJztmmFqwzAMhdMr5OIrYxtjG0nZSZdBDMLYsSzrWUrjHw9CQ2N9frIst7lN03QbGhoaGhoaGnpyvWy677KOxYL9c9P7Lut4rNiXi/HHvr9u+nIQV2/2wP3tIC4L9itx3y/MHq/1K7DHnl+BnfYygfvx5Owp5rCfn7HGU55YP4lrmt9UZ+MO7DmeJfM5vReYz8Cd8jmVv3QNH82J9/Ud86Z8pv6l9Ju59ux3ah/KsXIY5l3WXFz2uNdu9esM/Mh+0zs/ut/0zE/ZVwB7C/9ckHffNf1H5NBbR/bW+LX5Eb8rlPK1JY+1+an3H4bsXC5N/njda/IjvqdZ82LvtXMfye/d+9Y9zrv3WrWs9pkevEfF2Ys9eE/P31z+UjzI/NeStNfjeoGsf1re07O8xHsEhwW/xPvaPEH0gBr8i8D7Wi+9scf+c/i14rNgjSU562jGa8lu6b03/tWY36ImSHo+hF9WcyDZ963zFcVvUfu88CP3fQS7Vgz//I9J1vP25ETUBel5txe/ZPyauFp7fuQc9ObPeT8nxs3NQWrs+DNuzlryt6w9yfrkzhuXnzMHRz1/6dnaa4CbIxp1sPQ/dokJsf6PvJZ6HO7n3sfJ1TwOk3btQ/LXvkfWi/+obmryr0xuFL+k/nP2lFLNDNda7yId1d/a+sWNAVH/uJ5ZjT00pKk/DO/+QQ==
+  </data>
+ </layer>
+ <layer name="Houses" width="64" height="64">
+  <data encoding="base64" compression="zlib">
+   eJzt1VtuAiEYhmHX4ILUetqDVVu989TqHjzVumm/C0j+EAwQx3jI+yTv1TAwYRKo1QAAAAAAAAAAAAAAAAAAAAAAAPCuZmqh5hljR+rLNQ7ez53j2SzVj1pljP1WU9ckeD93jpiD+nMdI89L/lGpX7VR64yxAzV0fQbv584Rc1Jn13/keck/ekVbtXftIs9L/tG7qj/6Awo1VEs1H/wd92TPrfDs+lAd1U7MYe8Ue69Yfi99Ve5p6fp2bXtuhWdXV/VVL7G+vVPsvWL5vfSl9rRE6fp2bXtuXTu7UuydYu8Vy++lL7Wn91y/yrUB4FYXNBgzpg==
+  </data>
+ </layer>
+ <layer name="House Decor" width="64" height="64">
+  <data encoding="base64" compression="zlib">
+   eJzt1cENgjAUAFBmcAslIeoY6pUFTFzBKws4tDXRSwOkBQSM7yX/QOlvf/pTKAoAAAAAAAAAYA6bpQsAAAAA4C/tQxwyc6qR+WuyDbHLzClH5seWPsNbxtxriLol/z5i/ynO8Nc1IR4973N6xDosfa/nVkXPQ+51vEbX2FRSepTaxzJ6Pg6oJ16ja2wqKT3qm/P5bjUjamj7p8TOIU7FsDNNUb/r6PLa9/KlvQGGegLGRQ2F
+  </data>
+ </layer>
+ <layer name="Bridge" width="64" height="64">
+  <data encoding="base64" compression="zlib">
+   eJzt0bkNADAMAzEvk2f/CePSG6gICVwvQFUAAAAAQNLqdnpE0OluekSQ///+HwAAAAAAAAAAAGB6zT0BNQ==
+  </data>
+ </layer>
+</map>
