@@ -34,4 +34,4 @@ def load_all_graphics(dirname):
     return image_dict
 init()
 global IMAGES
-IMAGES = load_all_graphics("..\\RPG\\Resources\\")
+IMAGES = load_all_graphics("..\\PythonRpg\\Resources\\")

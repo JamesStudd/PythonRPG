@@ -668,13 +668,13 @@ class Level():
             self.stop_move_y = False
             self.check_bottom = False
 
-        for block in self.transition_list:
-            print(block.rect.x, block.rect.y, current_position_x, current_position_y)
+        #for block in self.transition_list:
+            #print(block.rect.x, block.rect.y, current_position_x, current_position_y)
 
         transitioner = pg.sprite.spritecollide(player, self.transition_list, False)
 
-        for block in transitioner:
-            print("askdasd")
+        #for block in transitioner:
+            #print("askdasd")
 
 
 class InsideLevel_01(CivRoom):
@@ -724,7 +724,7 @@ class Level_01(Level):
                     if 'Transition' in testprop:
                         inside = GoInside(gameMap,x,y,x*50,y*50,2)
                         self.transition_list.add(inside)
-                        print(self.transition_list)
+                        #print(self.transition_list)
 
 
 
