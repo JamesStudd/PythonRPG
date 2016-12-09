@@ -240,7 +240,12 @@ class Block(pg.sprite.Sprite):
         self.rect.x = rectx
         self.rect.y = recty
         
-        collide = tmx.get_tile_properties(self.x,self.y,self.layer)
+        collide = tmx.get_tile_properties(self.x, self.y, self.layer)
+        #for image in IMAGES:
+        #   print(image)
+
+        #for key in collide:
+        #    print(key)
         # single tile properties IE Grass
         # collide['Collision'] ==
         # 1 - Top of block
@@ -252,32 +257,31 @@ class Block(pg.sprite.Sprite):
         #SPECIFIC
         # 6 - Roof TOP
         if collide != None:
-            pass
-##            if collide['Collision'] == '1':
-##                collision = Invis(self.rect.x, self.rect.y, 'collisionup')
-##                invisblocks.add(collision)
-##                
-##            elif collide['Collision'] == '2':
-##                collision = Invis(self.rect.x, self.rect.y + 40, 'collisionup')
-##                invisblocks.add(collision)
-##                
-##            elif collide['Collision'] == '3':
-##                collision = Invis(self.rect.x, self.rect.y, 'collisionleft')
-##                invisblocks.add(collision)
-##                
-##            elif collide['Collision'] == '4':
-##                collision = Invis(self.rect.x + 40, self.rect.y, 'collisionleft')
-##                invisblocks.add(collision)
-##                
-##            elif collide['Collision'] == '5':
-##                collision = Invis(self.rect.x, self.rect.y, 'collisionbox')
-##                invisblocks.add(collision)
-##
-##            elif collide['Collision'] == '6':
-##                collision = Invis(self.rect.x, self.rect.y + 40, 'collisionup')
-##                invisblocks.add(collision)
-##                collision = Invis(self.rect.x, self.rect.y + 30, 'collisionup')
-##                invisblocks.add(collision)
+            if 'Collision' in collide:
+                if collide['Collision'] == '1':
+                    collision = Invis(self.rect.x, self.rect.y, 'collisionupDEBUG')
+                    invisblocks.add(collision)
+                if collide['Collision'] == '2':
+                    collision = Invis(self.rect.x, self.rect.y + 40, 'collisionupDEBUG')
+                    invisblocks.add(collision)
+
+                elif collide['Collision'] == '3':
+                    collision = Invis(self.rect.x, self.rect.y, 'collisionleftDEBUG')
+                    invisblocks.add(collision)
+
+                elif collide['Collision'] == '4':
+                    collision = Invis(self.rect.x + 40, self.rect.y, 'collisionleftDEBUG')
+                    invisblocks.add(collision)
+
+                elif collide['Collision'] == '5':
+                    collision = Invis(self.rect.x, self.rect.y, 'collisionboxDEBUG')
+                    invisblocks.add(collision)
+
+                elif collide['Collision'] == '6':
+                    collision = Invis(self.rect.x, self.rect.y + 40, 'collisionupDEBUG')
+                    invisblocks.add(collision)
+                    collision = Invis(self.rect.x, self.rect.y + 30, 'collisionupDEBUG')
+                    invisblocks.add(collision)
 
 class GoInside(pg.sprite.Sprite):
 
@@ -562,8 +566,8 @@ class Level():
 
     def __init__(self, player):
 
-        self.enemy_list = pg.sprite.Group()
-        self.invis_list = pg.sprite.Group()
+        self.enemy_list = pg.sprite.Group()   # Lists of enemies
+        self.invis_list = invisblocks
         self.transition_list = pg.sprite.Group()
         self.NPC_list = pg.sprite.Group()
         self.player = player
@@ -667,6 +671,22 @@ class Level():
         if (player.rect.top - 20) > SCREEN_RECT.centery and self.check_bottom == True and player.direction == "D":
             self.stop_move_y = False
             self.check_bottom = False
+
+        invisblock_hit_list = pg.sprite.spritecollide(player, invisblocks, False)
+
+        for block in invisblock_hit_list:
+            if player.change_x < 0:
+                player.move(0)
+                player.rect.left = block.rect.right
+            elif player.change_x > 0:
+                player.move(0)
+                player.rect.right = block.rect.left
+            elif player.change_y < 0:
+                player.move(0)
+                player.rect.top = block.rect.bottom
+            elif player.change_y > 0:
+                player.move(0)
+                player.rect.bottom = block.rect.top
 
         #for block in self.transition_list:
             #print(block.rect.x, block.rect.y, current_position_x, current_position_y)
