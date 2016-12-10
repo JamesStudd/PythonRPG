@@ -15,7 +15,7 @@ This list should be moderately lengthy for the time being as a lot of the code i
 **REFACTOR**
 
 - Completely change the "classes.py" file (what was I thinking?)
-- Remove/Change the 'ugly' code, such as appending the spritesheet of player
+- Remove/Change the 'ugly' code, ~~such as appending the spritesheet of player~~ 10/12/2016
 - ~~Fix collision~~ 9/12/2016
 
 After this is done, adding new (that should already be done) features will take place:
