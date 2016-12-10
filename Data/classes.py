@@ -18,54 +18,22 @@ class Player(pg.sprite.Sprite):
     walking_frames_d = []
     quests_accepted = []
 
-    direction = "R"
+    direction = "R"  # Direction is important for animations
 
-    level = None
-    name = None
+    level = None  # Only 1 level so far - overworld_main
+    name = None  # Name is set on the main character creation screen
     inside = False
 
     def __init__(self, gender):
-        super().__init__()
+        super().__init__()  # Super class is pygame sprite
 
         self.gender = gender
         
         if self.gender == "male":
-            sprite_sheet = SpriteSheet('Resources\\male.png')
-            image = sprite_sheet.get_image(0, 0, 32, 48)
-            self.walking_frames_d.append(image)
-            image = sprite_sheet.get_image(32, 0, 32, 48)
-            self.walking_frames_d.append(image)
-            image = sprite_sheet.get_image(64, 0, 32, 48)
-            self.walking_frames_d.append(image)
-            image = sprite_sheet.get_image(96, 0, 31, 48)
-            self.walking_frames_d.append(image)
-
-            image = sprite_sheet.get_image(0, 48, 32, 48)
-            self.walking_frames_l.append(image)
-            image = sprite_sheet.get_image(32, 48, 32, 48)
-            self.walking_frames_l.append(image)
-            image = sprite_sheet.get_image(64, 48, 32, 48)
-            self.walking_frames_l.append(image)
-            image = sprite_sheet.get_image(96, 48, 31, 48)
-            self.walking_frames_l.append(image)
-
-            image = sprite_sheet.get_image(0, 96, 32, 48)
-            self.walking_frames_r.append(image)
-            image = sprite_sheet.get_image(32, 96, 32, 48)
-            self.walking_frames_r.append(image)
-            image = sprite_sheet.get_image(64, 96, 32, 48)
-            self.walking_frames_r.append(image)
-            image = sprite_sheet.get_image(96, 96, 31, 48)
-            self.walking_frames_r.append(image)
-
-            image = sprite_sheet.get_image(0, 144, 32, 48)
-            self.walking_frames_u.append(image)
-            image = sprite_sheet.get_image(32, 144, 32, 48)
-            self.walking_frames_u.append(image)
-            image = sprite_sheet.get_image(64, 144, 32, 48)
-            self.walking_frames_u.append(image)
-            image = sprite_sheet.get_image(96, 144, 31, 48)
-            self.walking_frames_u.append(image)
+            self.walking_frames_l = sort_player_spritesheet("left")
+            self.walking_frames_r = sort_player_spritesheet("right")
+            self.walking_frames_u = sort_player_spritesheet("up")
+            self.walking_frames_d = sort_player_spritesheet("down")
             
         elif self.gender == "female":
             sprite_sheet = SpriteSheet('Resources\\dark.png')
@@ -148,15 +116,15 @@ class Player(pg.sprite.Sprite):
 
     def update(self):
 
-        self.rect.x += self.change_x
-        self.rect.y += self.change_y
+        self.rect.x += self.change_x  # Move the player left (-) or right (+)
+        self.rect.y += self.change_y  # Move the player up (-) or down (+)
 
-        posx = self.rect.x + self.level.world_shift_x
-        posy = self.rect.y + self.level.world_shift_y
+        posx = self.rect.x + self.level.world_shift_x  # Absolute position
+        posy = self.rect.y + self.level.world_shift_y  # Absolute position
         
         if self.direction == "R":
-            frame = (posx // 20) % len(self.walking_frames_r)
-            self.image= self.walking_frames_r[frame]
+            frame = (posx // 20) % len(self.walking_frames_r)  # If the player is moving right we
+            self.image= self.walking_frames_r[frame]           # want the correct animation, etc for next lines
         if self.direction == "L":
             frame = (posx // 20) % len(self.walking_frames_l)
             self.image = self.walking_frames_l[frame]
@@ -167,13 +135,12 @@ class Player(pg.sprite.Sprite):
             frame = (posy // 20) % len(self.walking_frames_d)
             self.image = self.walking_frames_d[frame]
 
-
-        if self.rect.right > SCREEN_RECT.right:
-            self.rect.x -= 5
-            self.change_x = 0
+        if self.rect.right > SCREEN_RECT.right:  # If the player moves all the way to the end of the screen
+            self.rect.x -= 5                     # we need to stop the player from moving and also set their
+            self.change_x = 0                    # position to a little bit left of the edge
             self.change_y = 0
 
-        if self.rect.left < SCREEN_RECT.left:
+        if self.rect.left < SCREEN_RECT.left:    # etc
             self.rect.x += 5
             self.change_x = 0
             self.change_y = 0
@@ -188,14 +155,13 @@ class Player(pg.sprite.Sprite):
             self.change_x = 0
             self.change_y = 0
 
-
     def move(self, key):
 
-        if key == 97:
-            self.change_x = -self.speed
-            self.change_y = 0
-            self.direction = "L"
-        elif key == 100:
+        if key == 97:                                          # Key - Values
+            self.change_x = -self.speed                        # 97      A
+            self.change_y = 0                                  # 100     D
+            self.direction = "L"                               # 119     W
+        elif key == 100:                                       # 115     S
             self.change_x = self.speed
             self.change_y = 0
             self.direction = "R"
@@ -211,11 +177,12 @@ class Player(pg.sprite.Sprite):
             self.change_x = 0
             self.change_y = 0
  
-global invisblocks
+global invisblocks  # This will be changed eventually to not be a global variable
 invisblocks = pg.sprite.Group()
 
-class Invis(pg.sprite.Sprite):
 
+class Invis(pg.sprite.Sprite):
+    """ Invis blocks - provide collision between player and any terrain I don't want traversable """
     def __init__(self, x, y, image):
         super().__init__()
 
@@ -229,10 +196,10 @@ class Block(pg.sprite.Sprite):
     
     def __init__(self, tmx, x, y, rectx, recty, layer):
         super().__init__()
-        self.tmx = tmx
+        self.tmx = tmx  # TMX is the import that allows for tile properties - collisions.
         self.x = x
         self.y = y
-        self.layer = layer
+        self.layer = layer  # Background, House layer, House Decor, etc.
         self.image = tmx.get_tile_image(self.x,self.y,self.layer)
         self.image.set_colorkey((255,0,255))
         
@@ -241,12 +208,12 @@ class Block(pg.sprite.Sprite):
         self.rect.y = recty
         
         collide = tmx.get_tile_properties(self.x, self.y, self.layer)
-        #for image in IMAGES:
-        #   print(image)
+        # The following key is for which type of block to create. For example, a bridge is 2 blocks wide
+        # and will need collision on those blocks so that the player can't 'fall' off the bridge. BUT, we can't
+        # have a full 50x50 block of collision as then the player can't walk onto the bridge, so a  "collisionleft"
+        # is created on the left blocks, and a "collisonright" on the right block,
+        # which allows for the player to walk onto the bridge, and not fall off the left or right side.
 
-        #for key in collide:
-        #    print(key)
-        # single tile properties IE Grass
         # collide['Collision'] ==
         # 1 - Top of block
         # 2 - Bottom of block
@@ -254,8 +221,9 @@ class Block(pg.sprite.Sprite):
         # 4 - Right of block
         # 5 - Full block
 
-        #SPECIFIC
+        # SPECIFIC
         # 6 - Roof TOP
+
         if collide != None:
             if 'Collision' in collide:
                 if collide['Collision'] == '1':
@@ -270,8 +238,8 @@ class Block(pg.sprite.Sprite):
                     invisblocks.add(collision)
 
                 elif collide['Collision'] == '4':
-                    collision = Invis(self.rect.x + 40, self.rect.y, 'collisionleftDEBUG')
-                    invisblocks.add(collision)
+                    collision = Invis(self.rect.x + 40, self.rect.y, 'collisionleftDEBUG')  # DEBUG is so the collision
+                    invisblocks.add(collision)                                              # block is visible.
 
                 elif collide['Collision'] == '5':
                     collision = Invis(self.rect.x, self.rect.y, 'collisionboxDEBUG')
@@ -284,7 +252,7 @@ class Block(pg.sprite.Sprite):
                     invisblocks.add(collision)
 
 class GoInside(pg.sprite.Sprite):
-
+    """ Currently unused """
     movement = {}
 
     def __init__(self, tmx, x, y, rectx, recty, layer):
@@ -302,7 +270,7 @@ class GoInside(pg.sprite.Sprite):
 
 
 class NPC(pg.sprite.Sprite):
-
+    """ NPC super class, allowing for movement and a few basic properties """
     level = None
     walking_frames_l= []
     walking_frames_u = []
@@ -364,7 +332,7 @@ class NPC(pg.sprite.Sprite):
         
 
 class Interactable(NPC):
-
+    """ Currently unused """
     change_x = 0
     change_y = 0
     
@@ -435,7 +403,7 @@ class Interactable(NPC):
                 
         
     def update(self, player):
-
+        """ Randomly chooses a direction to move in. Upon collision with player, stops. """
         if self.controller != 6:
             self.controller += 1
         elif self.controller == 6:
@@ -510,8 +478,9 @@ class Interactable(NPC):
             self.change_x = 0
             self.change_y = 0
 
-class CivRoom():
 
+class CivRoom:
+    """ Currently unused """
     background = None
     NPC_list = None
 
@@ -520,7 +489,6 @@ class CivRoom():
 
     world_shift_x = 0
     world_shift_y = 0
-
 
     def __init__(self, player, x, y):
 
@@ -540,24 +508,25 @@ class CivRoom():
         screen.fill(pg.Color('black'))
         screen.blit(self.background, (self.room_shift_x, self.room_shift_y))
         self.NPC_list.draw(screen)
-                                
-class Level():
 
+
+class Level:
+    """ Super Class for a level """
     enemy_list = None
-    background = None
-    invis_list = None
-    transition_list = None
+    background = None  # Map basically
+    invis_list = None  # Collidable blocks
+    transition_list = None  #
     NPC_list = None
 
-    world_shift_x = 0
-    world_shift_y = 0
-    level_limit_x = -1000
-    level_limit_y = -1000
-    level_limit_xleft = 1000
-    level_limit_yup = 900
+    world_shift_x = 0  # How far has the map moved
+    world_shift_y = 0  # ""
+    level_limit_x = -1000  # Limits of map movement X left
+    level_limit_y = -1000  # Limits of map movement Y up
+    level_limit_xleft = 1000  # Limits of map movement X right
+    level_limit_yup = 900 # Limits of map movement Y down
 
-    stop_move_x = False
-    stop_move_y = False
+    stop_move_x = False  # If the player moves all the way left or right, the map will stop shifting
+    stop_move_y = False  # If the player moves all the way up or down, the map will stop shifting
 
     check_right = False
     check_left = False
@@ -566,12 +535,11 @@ class Level():
 
     def __init__(self, player):
 
-        self.enemy_list = pg.sprite.Group()   # Lists of enemies
-        self.invis_list = invisblocks
+        self.enemy_list = pg.sprite.Group()  # Lists of enemies
+        self.invis_list = invisblocks  # Lists of obstacles
         self.transition_list = pg.sprite.Group()
         self.NPC_list = pg.sprite.Group()
         self.player = player
-
 
     def draw(self, screen):
 

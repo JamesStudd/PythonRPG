@@ -1,5 +1,6 @@
 import pygame as pg
 import os
+from Data.spritesheet_functions import SpriteSheet
 
 pg.init()
 
@@ -21,6 +22,31 @@ def init():
     screen = pg.display.set_mode(SIZE)
 
     SCREEN_RECT = screen.get_rect()
+
+
+def sort_player_spritesheet(animation):
+    sprite_sheet = SpriteSheet('Resources\\main_character.png')
+    array = []
+    walky = 0;
+    sizey = 51;
+    if animation == "up":
+        walky = 511
+    elif animation == "left":
+        walky = 574
+    elif animation == "down":
+        walky = 635
+        sizey = 54
+    elif animation == "right":
+        walky = 702
+
+    walkanimation = [0, 64, 128, 192, 256, 320, 384, 448, 512]
+
+    for x in range(0, 9):
+        image = sprite_sheet.get_image(walkanimation[x], walky, 30, sizey)
+        array.append(image)
+    return array
+
+
 
 def load_all_graphics(dirname):
     image_dict = {}
