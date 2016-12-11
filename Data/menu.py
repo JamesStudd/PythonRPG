@@ -2,7 +2,8 @@ import pygame as pg
 import os
 from Data.spritesheet_functions import SpriteSheet
 from Data.images import *
-from Data.classes import *
+from Data.level_classes import *
+from Data.player_related import *
 import Data.eztext
 pg.init()
 
@@ -20,12 +21,12 @@ class Menu():
         self.left_button = None
         self.right_button = None
         
-        sprite_sheet = SpriteSheet('Resources\\male.png')
-        image = sprite_sheet.get_image(64, 0, 32, 48)
+        sprite_sheet = SpriteSheet('Resources\\main_character.png')
+        image = sprite_sheet.get_image(0, 635, 30, 51)
         self.male = image
 
-        sprite_sheet = SpriteSheet('Resources\\dark.png')
-        image = sprite_sheet.get_image(129, 193, 31, 48)
+        sprite_sheet = SpriteSheet('Resources\\main_character_female.png')
+        image = sprite_sheet.get_image(0, 635, 30, 51)
         self.female = image
 
         sprite_sheet = SpriteSheet('Resources\\bill.png')

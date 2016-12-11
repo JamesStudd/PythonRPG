@@ -1,7 +1,9 @@
 import pygame as pg
 import os
-from Data.classes import *
+from Data.level_classes import *
 from Data.images import *
+from Data.player_related import *
+from Data.interactables_npcs import *
 from Data.menu import Menu, char_create
 from Data.intro import Dialogue, show_intro
 
@@ -45,10 +47,12 @@ def main():
 
         active_sprite_list.update()
         if player.inside == False:
+            #player.level = current_level_overworld
             current_level_overworld.update(player)
             for NPC in current_level_overworld.NPC_list:
                 NPC.update(player)
         else:
+            #player.level = current_level_inside
             current_level_inside.update(player)
             for NPC in current_level_inside.NPC_list:
                 NPC.update(player)

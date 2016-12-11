@@ -1,7 +1,7 @@
 import pygame as pg
 import os
 from Data.images import *
-from Data.classes import *
+from Data.level_classes import *
 pg.init()
 
 class Dialogue():

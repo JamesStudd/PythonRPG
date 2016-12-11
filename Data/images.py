@@ -24,8 +24,12 @@ def init():
     SCREEN_RECT = screen.get_rect()
 
 
-def sort_player_spritesheet(animation):
-    sprite_sheet = SpriteSheet('Resources\\main_character.png')
+def sort_player_spritesheet(animation, name):
+    if name == "male":
+        sprite_sheet = SpriteSheet('Resources\\main_character.png')
+    elif name == "female":
+        sprite_sheet = SpriteSheet('Resources\\main_character_female.png')
+
     array = []
     walky = 0;
     sizey = 51;
