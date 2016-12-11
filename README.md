@@ -14,7 +14,7 @@ Making games has always been a passion for me and, IMO, RPG games are the king o
 This list should be moderately lengthy for the time being as a lot of the code isn't structured very well, so naturally, the first on the list is:
 **REFACTOR**
 
-- Completely change the "classes.py" file (what was I thinking?)
+- ~~Completely change the "classes.py" file (what was I thinking?)~~ 11/12/2016
 - Remove/Change the 'ugly' code, ~~such as appending the spritesheet of player~~ 10/12/2016
 - ~~Fix collision~~ 9/12/2016
 
