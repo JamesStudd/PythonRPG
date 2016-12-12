@@ -23,6 +23,8 @@ class Player(pg.sprite.Sprite):
     level = None  # Only 1 level so far - overworld_main
     name = None  # Name is set on the main character creation screen
     inside = False
+    transitionhit = False
+    transitiontogoto = 1;
 
     def __init__(self, gender):
         super().__init__()  # Super class is pygame sprite

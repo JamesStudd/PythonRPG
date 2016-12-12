@@ -21,7 +21,7 @@ This list should be moderately lengthy for the time being as a lot of the code i
 After this is done, adding new (that should already be done) features will take place:
 
 - Pause Menu
-- Entry into houses
+- ~~Entry into houses~~ Kind of - 12/12/2016
 - Talking to NPCs
 - Save/Load
 - Inventory

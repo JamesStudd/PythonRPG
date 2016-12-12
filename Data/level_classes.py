@@ -3,6 +3,7 @@ from Data.spritesheet_functions import SpriteSheet
 from Data.images import *
 from pytmx import *
 from Data.interactables_npcs import *
+from main import *
 import random
 pg.init()
 
@@ -56,6 +57,8 @@ class Block(pg.sprite.Sprite):
 
         # SPECIFIC
         # 6 - Roof TOP
+        # 7 - Left and bottom of block
+        # 8 - Right and bottom of block
 
         if collide != None:
             if 'Collision' in collide:
@@ -83,13 +86,27 @@ class Block(pg.sprite.Sprite):
                     invisblocks.add(collision)
                     collision = Invis(self.rect.x, self.rect.y + 30, 'collisionupDEBUG')
                     invisblocks.add(collision)
-            #if 'Transition' in collide:
-            #    if collide['Transition'] == '1':
-             #       collision = TransitionBlock(self.rect.x, self.rect.y)
-              #      transition_list.add(collision)
+
+                elif collide['Collision'] == '7':
+                    collision = Invis(self.rect.x, self.rect.y, 'collisionleftDEBUG')
+                    invisblocks.add(collision)
+                    collision = Invis(self.rect.x, self.rect.y + 40, 'collisionupDEBUG')
+                    invisblocks.add(collision)
+
+                elif collide['Collision'] == '8':
+                    collision = Invis(self.rect.x + 40, self.rect.y, 'collisionleftDEBUG')
+                    invisblocks.add(collision)
+                    collision = Invis(self.rect.x, self.rect.y + 40, 'collisionupDEBUG')
+                    invisblocks.add(collision)
+
+            if 'Transition' in collide:
+                if collide['Transition'] == '1':
+                    collision = TransitionBlock(self.rect.x, self.rect.y)
+                    transition_list.add(collision)
+
 
 class TransitionBlock(pg.sprite.Sprite):
-    """ Currently unused """
+    """ Transition blocks are the blocks that teleport the player to inside a house """
 
     def __init__(self, x, y):
         super().__init__()
@@ -100,11 +117,13 @@ class TransitionBlock(pg.sprite.Sprite):
         self.rect.y = y
 
 
-
 class CivRoom:
     """ Currently unused """
     background = IMAGES['insidehouse1']
     NPC_list = None
+    invis_list = None
+    transition_list = None
+    shiftdone = False
 
     room_shift_x = 0
     room_shift_y = 0
@@ -119,17 +138,77 @@ class CivRoom:
         player.rect.x = x
         player.rect.y = y
         player.direction = "U"
+        self.invis_list = invisblocks
+        self.transition_list = transition_list
 
     def update(self, player):
 
         self.NPC_list.update()
+        if self.shiftdone == False:
+            for invis in self.invis_list:
+                invis.rect.x += self.room_shift_x
+                invis.rect.y += self.room_shift_y
+            for trans in self.transition_list:
+                trans.rect.x += self.room_shift_x
+                trans.rect.y += self.room_shift_y
+            self.shiftdone = True
 
+        invisblock_hit_list = pg.sprite.spritecollide(player, invisblocks, False)
+
+        for block in invisblock_hit_list:
+            if player.change_x < 0:
+                player.move(0)
+                player.rect.left = block.rect.right
+            elif player.change_x > 0:
+                player.move(0)
+                player.rect.right = block.rect.left
+            elif player.change_y < 0:
+                player.move(0)
+                player.rect.top = block.rect.bottom
+            elif player.change_y > 0:
+                player.move(0)
+                player.rect.bottom = block.rect.top
+
+        transition_hit_list = pg.sprite.spritecollide(player, transition_list, False)
+        for block in transition_hit_list:
+            player.transitionhit = True
 
     def draw(self, screen):
 
         screen.fill(pg.Color('black'))
         screen.blit(self.background, (self.room_shift_x, self.room_shift_y))
         self.NPC_list.draw(screen)
+        self.invis_list.draw(screen)
+        self.transition_list.draw(screen)
+
+
+class InsideLevel_01(CivRoom):
+
+    def __init__(self, player):
+
+        CivRoom.__init__(self, player, 460, 400)
+
+        self.room_shift_x = 150
+        self.room_shift_y = 200
+        self.background = IMAGES['insidehouse1']
+
+        self.invis_list.empty()
+        invisblocks.empty()
+        self.transition_list.empty()
+        transition_list.empty()
+
+        gameMap = load_pygame("Resources\\insidehouse1.tmx")
+        self.blocksprites = pg.sprite.Group()
+        self.fgblocksprites = pg.sprite.Group()
+
+        for y in range(8):
+            for x in range(10):
+                testprop = gameMap.get_tile_properties(x, y, 0)
+                if testprop != None:
+                    if 'Collision' in testprop:
+                        block = Block(gameMap, x, y, x * 50, y * 50, 0)
+                        self.blocksprites.add(block)
+
 
 
 class Level:
@@ -171,10 +250,6 @@ class Level:
         self.NPC_list.draw(screen)
         self.transition_list.draw(screen)
 
-        # c
-        #for block in self.transition_list:
-        #    pg.draw.rect(screen, pg.Color('black'), (block.rect.x, block.rect.y, 50, 50), 0)
-
     def shift_world(self, shift_x, shift_y):
 
         self.world_shift_x += shift_x
@@ -197,7 +272,7 @@ class Level:
         for NPC in self.NPC_list:
             NPC.rect.y += shift_y
         for trans in self.transition_list:
-            trans.rect.x += shift_x
+            trans.rect.y += shift_y
 
     def update(self, player):
 
@@ -278,30 +353,11 @@ class Level:
                 player.move(0)
                 player.rect.bottom = block.rect.top
 
-#        transition_hit_list = pg.sprite.spritecollide(player, transition_list, False)
+        transition_hit_list = pg.sprite.spritecollide(player, transition_list, False)
+        for block in transition_hit_list:
+            player.transitionhit = True
 
 
-        #for block in transition_hit_list:
-         #   player.inside = true
-
-
-        #transitioner = pg.sprite.spritecollide(player, self.transition_list, False)
-
-        #for block in transitioner:
-            #print("askdasd")
-
-
-class InsideLevel_01(CivRoom):
-
-    def __init__(self, player):
-
-        CivRoom.__init__(self, player, 385, 545)
-
-        self.room_shift_x = 150
-        self.room_shift_y = 200
-        self.background = IMAGES['insidehouse1']
-
-        
 class Level_01(Level):
 
     def __init__(self, player):
@@ -315,6 +371,7 @@ class Level_01(Level):
 
         self.invis_list.empty()
         invisblocks.empty()
+        transition_list.empty()
 
         gameMap = load_pygame("Resources\\Overworld_main.tmx")
         self.blocksprites = pg.sprite.Group()
@@ -333,12 +390,11 @@ class Level_01(Level):
                     block = Block(gameMap,x,y,x*50,y*50,1)
                     self.fgblocksprites.add(block)
 
-                #testprop = gameMap.get_tile_properties(x,y,2)
-                #if testprop != None:
-                    #if 'Transition' in testprop:
-                     #   inside = Block(gameMap,x,y,x*50,y*50,2)
-                      #  transition_list.add(inside)
-                        #print(self.transition_list)
+                testprop = gameMap.get_tile_properties(x,y,2)
+                if testprop != None:
+                    if 'Transition' in testprop:
+                        inside = Block(gameMap,x,y,x*50,y*50,2)
+                        transition_list.add(inside)
 
         oldman1 = Interactable('oldman1', 2000, 2000, 'civi1.png', 100, 1)
         oldman1.level = self
@@ -351,7 +407,6 @@ class Level_02(Level):
 
         Level.__init__(self, player)
         self.background = IMAGES['insidehouse1']
-
         self.invis_list.empty()
         invisblocks.empty()
 

@@ -1,11 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="10" height="8" tilewidth="50" tileheight="50" nextobjectid="1">
- <tileset firstgid="1" name="Window" tilewidth="50" tileheight="50">
+ <tileset firstgid="1" name="Window" tilewidth="50" tileheight="50" tilecount="24" columns="4">
   <image source="TS/Window.png" trans="ff00ff" width="200" height="300"/>
+  <tile id="4">
+   <properties>
+    <property name="Collision" type="int" value="2"/>
+   </properties>
+  </tile>
+  <tile id="5">
+   <properties>
+    <property name="Collision" type="int" value="2"/>
+   </properties>
+  </tile>
+  <tile id="6">
+   <properties>
+    <property name="Collision" type="int" value="2"/>
+   </properties>
+  </tile>
+  <tile id="7">
+   <properties>
+    <property name="Collision" type="int" value="2"/>
+   </properties>
+  </tile>
+  <tile id="8">
+   <properties>
+    <property name="Collision" type="int" value="3"/>
+   </properties>
+  </tile>
+  <tile id="11">
+   <properties>
+    <property name="Collision" type="int" value="4"/>
+   </properties>
+  </tile>
+  <tile id="12">
+   <properties>
+    <property name="Collision" type="int" value="3"/>
+   </properties>
+  </tile>
+  <tile id="15">
+   <properties>
+    <property name="Collision" type="int" value="4"/>
+   </properties>
+  </tile>
+  <tile id="16">
+   <properties>
+    <property name="Collision" type="int" value="7"/>
+   </properties>
+  </tile>
+  <tile id="17">
+   <properties>
+    <property name="Collision" type="int" value="2"/>
+   </properties>
+  </tile>
+  <tile id="18">
+   <properties>
+    <property name="Collision" type="int" value="2"/>
+   </properties>
+  </tile>
+  <tile id="19">
+   <properties>
+    <property name="Collision" type="int" value="8"/>
+   </properties>
+  </tile>
+  <tile id="20">
+   <properties>
+    <property name="Transition" type="int" value="1"/>
+   </properties>
+  </tile>
  </tileset>
- <layer name="Tile Layer 1" width="10" height="8">
+ <layer name="main" width="10" height="8">
   <data encoding="base64" compression="zlib">
-   eJyFzEsKgDAMRdH4t1qDivtfq1foIDxKHRxCw206M+sxNIyYMGNpWJGwYS+zJuOQ3de7yOGeSxv/nuGeS6tdCm+vTC/dhfvHgxetKwNS
+   eJx9zFsKwCAMBdH0/Q5W2/1vtSP4EYL14xCQ63Qi0mNoGDFhxtKwYsOOo9yaE5d7y3t1gump2/711G0t27NNdX9z70aseMtNePABrVMDUg==
   </data>
  </layer>
 </map>
