@@ -101,7 +101,7 @@ class Block(pg.sprite.Sprite):
 
             if 'Transition' in collide:
                 if collide['Transition'] == '1':
-                    collision = TransitionBlock(self.rect.x, self.rect.y)
+                    collision = TransitionBlock(self.rect.x, self.rect.y + 40)
                     transition_list.add(collision)
 
 
@@ -110,7 +110,7 @@ class TransitionBlock(pg.sprite.Sprite):
 
     def __init__(self, x, y):
         super().__init__()
-        self.image = IMAGES['collisionboxDEBUG']
+        self.image = IMAGES['collisionupDEBUG']
         self.rect = self.image.get_rect()
 
         self.rect.x = x
@@ -130,6 +130,9 @@ class CivRoom:
 
     world_shift_x = 0
     world_shift_y = 0
+
+    exit_coord_x = 0
+    exit_coord_y = 0
 
     def __init__(self, player, x, y):
 
@@ -151,6 +154,7 @@ class CivRoom:
             for trans in self.transition_list:
                 trans.rect.x += self.room_shift_x
                 trans.rect.y += self.room_shift_y
+                print("Moved Trans")
             self.shiftdone = True
 
         invisblock_hit_list = pg.sprite.spritecollide(player, invisblocks, False)
@@ -200,6 +204,8 @@ class InsideLevel_01(CivRoom):
         gameMap = load_pygame("Resources\\insidehouse1.tmx")
         self.blocksprites = pg.sprite.Group()
         self.fgblocksprites = pg.sprite.Group()
+        self.exit_coord_x = 1600
+        self.exit_coord_y = 2700
 
         for y in range(8):
             for x in range(10):
@@ -208,7 +214,9 @@ class InsideLevel_01(CivRoom):
                     if 'Collision' in testprop:
                         block = Block(gameMap, x, y, x * 50, y * 50, 0)
                         self.blocksprites.add(block)
-
+                    if 'Transition' in testprop:
+                        block = Block(gameMap, x, y, x * 50, y * 50, 0)
+                        transition_list.add(block)
 
 
 class Level:
@@ -233,6 +241,9 @@ class Level:
     check_left = False
     check_top = False
     check_bottom = False
+
+    exit_coord_x = 0
+    exit_coord_y = 0
 
     def __init__(self, player):
 

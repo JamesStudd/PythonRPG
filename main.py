@@ -21,6 +21,8 @@ def main():
 
     player.level = Level_01(player)
     player.inside = False
+    paused = False
+    paused_font = pg.font.SysFont("monospace", 30)
 
     # This bit will eventually use threads, one for updating and one for rendering
     while True:
@@ -31,24 +33,31 @@ def main():
                 pg.quit()
                 quit()
             elif event.type == pg.KEYDOWN:
-                player.move(event.key)
+                if(event.key == pg.K_ESCAPE):
+                    paused = not paused
+                if not paused:
+                    player.move(event.key)
             elif event.type == pg.KEYUP:
-                player.move(0)
+                if not paused:
+                    player.move(0)
 
-        active_sprite_list.update()
-        player.level.update(player)
-        for NPC in player.level.NPC_list:
-            NPC.update(player)
+        if not paused:
+            active_sprite_list.update()
+            player.level.update(player)
+            for NPC in player.level.NPC_list:
+                NPC.update(player)
 
-        if player.transitionhit == True:
-            if player.inside:
-                player.level = Level_01(player)
-                player.inside = False
-            else:
-                if player.transitiontogoto == 1:
-                    player.level = InsideLevel_01(player)
-                player.inside = True
-            player.transitionhit = False;
+            if player.transitionhit == True:
+                if player.inside:
+                    player.rect.x = player.level.exit_coord_x
+                    player.rect.y = player.level.exit_coord_y
+                    player.level = Level_01(player)
+                    player.inside = False
+                else:
+                    if player.transitiontogoto == 1:
+                        player.level = InsideLevel_01(player)
+                    player.inside = True
+                player.transitionhit = False;
 
 
 
@@ -57,8 +66,15 @@ def main():
         # --- DRAW
         player.level.draw(screen)
         active_sprite_list.draw(screen)
+
+        if paused:
+            text = paused_font.render("Paused", 1, (255, 255, 0))
+            screen.blit(text, (340, 385))
+
         pg.display.flip()
         # --- END DRAW
+
+
 
         clock.tick(30)
 
