@@ -24,7 +24,7 @@ class Player(pg.sprite.Sprite):
     name = None  # Name is set on the main character creation screen
     inside = False
     transitionhit = False
-    transitiontogoto = 1;
+    transitiontogoto = 0;
 
     def __init__(self, gender):
         super().__init__()  # Super class is pygame sprite

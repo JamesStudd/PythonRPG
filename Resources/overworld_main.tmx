@@ -437,7 +437,7 @@
  </layer>
  <layer name="House Decor" width="64" height="64">
   <data encoding="base64" compression="zlib">
-   eJzt1c8NgjAUx/HO4BIGSYg4hnplARNW8MoCTmA8OanPpF5eKOk/LabfT/I7UPra0gYwBgAAAAAAAEBJD5tabW1qVdvz31WeNgAAALXYlF4AAAAAAAAAqrSX9IE1XWL9mjSSXWBNm1ivld7DMaDvRTLM1F8T5s+xh/9uktwW7oecEdah9Hv9a526jnmv9Riutlx8zsj3HFt1fYhYjx7D1ZaLzxkt9fl8t6aENcz9U7ST5Gji9tTHYNfh8p73/KW5ASDWC/G9EwU=
+   eJzt1UEKwjAQheGcwUuIFop6DHXbCwhewW0v4AnElSc1hbgZYjtJCG2Z/4O3MkPSBJ7OAQAAAAAAAJjTO8SqbYhV1r7/JfIJAQAAsGIz9wEAAAAAAABg0sHnmDjTFs4vyc5nnzjTFM5L2jtsp5dkuSesvfl0kflHwf7aO2yml6xW7/Mc+T3ljbAMa+/GVLKfcrox1nG1em+geSPtO8p+OmWcJ9ZxNXtP80Zja3691RecIfafIl18zi7vTjW6cI5/hn2vlfYGgFxf+1ETXg==
   </data>
  </layer>
  <layer name="Bridge" width="64" height="64">

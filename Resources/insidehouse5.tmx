@@ -70,7 +70,7 @@
  </tileset>
  <layer name="main" width="10" height="8">
   <data encoding="base64" compression="zlib">
-   eJxjYIAARiBmAmJmJMzCgAlYgZgNiNmRMAcWdZxAzIWGefCo4wZiPigWwKKOF8kcbjzmCQKxEBCLQrEwEItgUUctAAD4gAF2
+   eJxjYIAARiBmhmImKM3CgAlYgZgditmgNAcWdZxAzIWGefCo4wZiPigWwKKOF8kcbjzmCQKxEBCLQrEwEItgUUctAAD4kAF2
   </data>
  </layer>
 </map>

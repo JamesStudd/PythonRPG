@@ -27,7 +27,9 @@ class Invis(pg.sprite.Sprite):
 
 
 class Block(pg.sprite.Sprite):
-    
+
+    #teleportto = 0
+
     def __init__(self, tmx, x, y, rectx, recty, layer):
         super().__init__()
         self.tmx = tmx  # TMX is the import that allows for tile properties - collisions.
@@ -63,40 +65,40 @@ class Block(pg.sprite.Sprite):
         if collide != None:
             if 'Collision' in collide:
                 if collide['Collision'] == '1':
-                    collision = Invis(self.rect.x, self.rect.y, 'collisionupDEBUG')
+                    collision = Invis(self.rect.x, self.rect.y, 'collisionup')
                     invisblocks.add(collision)
                 if collide['Collision'] == '2':
-                    collision = Invis(self.rect.x, self.rect.y + 40, 'collisionupDEBUG')
+                    collision = Invis(self.rect.x, self.rect.y + 40, 'collisionup')
                     invisblocks.add(collision)
 
                 elif collide['Collision'] == '3':
-                    collision = Invis(self.rect.x, self.rect.y, 'collisionleftDEBUG')
+                    collision = Invis(self.rect.x, self.rect.y, 'collisionleft')
                     invisblocks.add(collision)
 
                 elif collide['Collision'] == '4':
-                    collision = Invis(self.rect.x + 40, self.rect.y, 'collisionleftDEBUG')  # DEBUG is so the collision
+                    collision = Invis(self.rect.x + 40, self.rect.y, 'collisionleft')  # DEBUG is so the collision
                     invisblocks.add(collision)                                              # block is visible.
 
                 elif collide['Collision'] == '5':
-                    collision = Invis(self.rect.x, self.rect.y, 'collisionboxDEBUG')
+                    collision = Invis(self.rect.x, self.rect.y, 'collisionbox')
                     invisblocks.add(collision)
 
                 elif collide['Collision'] == '6':
-                    collision = Invis(self.rect.x, self.rect.y + 40, 'collisionupDEBUG')
+                    collision = Invis(self.rect.x, self.rect.y + 40, 'collisionup')
                     invisblocks.add(collision)
-                    collision = Invis(self.rect.x, self.rect.y + 30, 'collisionupDEBUG')
+                    collision = Invis(self.rect.x, self.rect.y + 30, 'collisionup')
                     invisblocks.add(collision)
 
                 elif collide['Collision'] == '7':
-                    collision = Invis(self.rect.x, self.rect.y, 'collisionleftDEBUG')
+                    collision = Invis(self.rect.x, self.rect.y, 'collisionleft')
                     invisblocks.add(collision)
-                    collision = Invis(self.rect.x, self.rect.y + 40, 'collisionupDEBUG')
+                    collision = Invis(self.rect.x, self.rect.y + 40, 'collisionup')
                     invisblocks.add(collision)
 
                 elif collide['Collision'] == '8':
-                    collision = Invis(self.rect.x + 40, self.rect.y, 'collisionleftDEBUG')
+                    collision = Invis(self.rect.x + 40, self.rect.y, 'collisionleft')
                     invisblocks.add(collision)
-                    collision = Invis(self.rect.x, self.rect.y + 40, 'collisionupDEBUG')
+                    collision = Invis(self.rect.x, self.rect.y + 40, 'collisionup')
                     invisblocks.add(collision)
 
             if 'Transition' in collide:
@@ -110,16 +112,16 @@ class TransitionBlock(pg.sprite.Sprite):
 
     def __init__(self, x, y):
         super().__init__()
-        self.image = IMAGES['collisionupDEBUG']
+        self.image = IMAGES['collisionup']
         self.rect = self.image.get_rect()
-
+        self.teleportto = 0
         self.rect.x = x
         self.rect.y = y
 
 
 class CivRoom:
     """ Currently unused """
-    background = IMAGES['insidehouse1']
+    background = None
     NPC_list = None
     invis_list = None
     transition_list = None
@@ -154,7 +156,6 @@ class CivRoom:
             for trans in self.transition_list:
                 trans.rect.x += self.room_shift_x
                 trans.rect.y += self.room_shift_y
-                print("Moved Trans")
             self.shiftdone = True
 
         invisblock_hit_list = pg.sprite.spritecollide(player, invisblocks, False)
@@ -175,7 +176,8 @@ class CivRoom:
 
         transition_hit_list = pg.sprite.spritecollide(player, transition_list, False)
         for block in transition_hit_list:
-            player.transitionhit = True
+            if player.direction == "D":
+                player.transitionhit = True
 
     def draw(self, screen):
 
@@ -204,8 +206,172 @@ class InsideLevel_01(CivRoom):
         gameMap = load_pygame("Resources\\insidehouse1.tmx")
         self.blocksprites = pg.sprite.Group()
         self.fgblocksprites = pg.sprite.Group()
-        self.exit_coord_x = 1600
-        self.exit_coord_y = 2700
+        self.exit_coord_x = 815
+        self.exit_coord_y = 2675
+
+        for y in range(8):
+            for x in range(10):
+                testprop = gameMap.get_tile_properties(x, y, 0)
+                if testprop != None:
+                    if 'Collision' in testprop:
+                        block = Block(gameMap, x, y, x * 50, y * 50, 0)
+                        self.blocksprites.add(block)
+                    if 'Transition' in testprop:
+                        block = Block(gameMap, x, y, x * 50, y * 50, 0)
+                        transition_list.add(block)
+
+
+class InsideLevel_03(CivRoom):
+
+    def __init__(self, player):
+
+        CivRoom.__init__(self, player, 460, 400)
+
+        self.room_shift_x = 150
+        self.room_shift_y = 200
+        self.background = IMAGES['insidehouse3']
+
+        self.invis_list.empty()
+        invisblocks.empty()
+        self.transition_list.empty()
+        transition_list.empty()
+
+        gameMap = load_pygame("Resources\\insidehouse3.tmx")
+        self.blocksprites = pg.sprite.Group()
+        self.fgblocksprites = pg.sprite.Group()
+        self.exit_coord_x = 1605
+        self.exit_coord_y = 2685
+
+        for y in range(8):
+            for x in range(10):
+                testprop = gameMap.get_tile_properties(x, y, 0)
+                if testprop != None:
+                    if 'Collision' in testprop:
+                        block = Block(gameMap, x, y, x * 50, y * 50, 0)
+                        self.blocksprites.add(block)
+                    if 'Transition' in testprop:
+                        block = Block(gameMap, x, y, x * 50, y * 50, 0)
+                        transition_list.add(block)
+
+class InsideLevel_05(CivRoom):
+
+    def __init__(self, player):
+
+        CivRoom.__init__(self, player, 460, 400)
+
+        self.room_shift_x = 150
+        self.room_shift_y = 200
+        self.background = IMAGES['insidehouse5']
+
+        self.invis_list.empty()
+        invisblocks.empty()
+        self.transition_list.empty()
+        transition_list.empty()
+
+        gameMap = load_pygame("Resources\\insidehouse5.tmx")
+        self.blocksprites = pg.sprite.Group()
+        self.fgblocksprites = pg.sprite.Group()
+        self.exit_coord_x = 2855
+        self.exit_coord_y = 2715
+
+        for y in range(8):
+            for x in range(10):
+                testprop = gameMap.get_tile_properties(x, y, 0)
+                if testprop != None:
+                    if 'Collision' in testprop:
+                        block = Block(gameMap, x, y, x * 50, y * 50, 0)
+                        self.blocksprites.add(block)
+                    if 'Transition' in testprop:
+                        block = Block(gameMap, x, y, x * 50, y * 50, 0)
+                        transition_list.add(block)
+
+
+class InsideLevel_07(CivRoom):
+
+    def __init__(self, player):
+
+        CivRoom.__init__(self, player, 460, 400)
+
+        self.room_shift_x = 150
+        self.room_shift_y = 200
+        self.background = IMAGES['insidehouse7']
+
+        self.invis_list.empty()
+        invisblocks.empty()
+        self.transition_list.empty()
+        transition_list.empty()
+
+        gameMap = load_pygame("Resources\\insidehouse7.tmx")
+        self.blocksprites = pg.sprite.Group()
+        self.fgblocksprites = pg.sprite.Group()
+        self.exit_coord_x = 1265
+        self.exit_coord_y = 3015
+
+        for y in range(8):
+            for x in range(10):
+                testprop = gameMap.get_tile_properties(x, y, 0)
+                if testprop != None:
+                    if 'Collision' in testprop:
+                        block = Block(gameMap, x, y, x * 50, y * 50, 0)
+                        self.blocksprites.add(block)
+                    if 'Transition' in testprop:
+                        block = Block(gameMap, x, y, x * 50, y * 50, 0)
+                        transition_list.add(block)
+
+
+class InsideLevel_09(CivRoom):
+
+    def __init__(self, player):
+
+        CivRoom.__init__(self, player, 460, 400)
+
+        self.room_shift_x = 150
+        self.room_shift_y = 200
+        self.background = IMAGES['insidehouse9']
+
+        self.invis_list.empty()
+        invisblocks.empty()
+        self.transition_list.empty()
+        transition_list.empty()
+
+        gameMap = load_pygame("Resources\\insidehouse9.tmx")
+        self.blocksprites = pg.sprite.Group()
+        self.fgblocksprites = pg.sprite.Group()
+        self.exit_coord_x = 1915
+        self.exit_coord_y = 2915
+
+        for y in range(8):
+            for x in range(10):
+                testprop = gameMap.get_tile_properties(x, y, 0)
+                if testprop != None:
+                    if 'Collision' in testprop:
+                        block = Block(gameMap, x, y, x * 50, y * 50, 0)
+                        self.blocksprites.add(block)
+                    if 'Transition' in testprop:
+                        block = Block(gameMap, x, y, x * 50, y * 50, 0)
+                        transition_list.add(block)
+
+
+class InsideLevel_11(CivRoom):
+
+    def __init__(self, player):
+
+        CivRoom.__init__(self, player, 460, 400)
+
+        self.room_shift_x = 150
+        self.room_shift_y = 200
+        self.background = IMAGES['insidehouse11']
+
+        self.invis_list.empty()
+        invisblocks.empty()
+        self.transition_list.empty()
+        transition_list.empty()
+
+        gameMap = load_pygame("Resources\\insidehouse11.tmx")
+        self.blocksprites = pg.sprite.Group()
+        self.fgblocksprites = pg.sprite.Group()
+        self.exit_coord_x = 2960
+        self.exit_coord_y = 2965
 
         for y in range(8):
             for x in range(10):
@@ -362,11 +528,16 @@ class Level:
                 player.rect.top = block.rect.bottom
             elif player.change_y > 0:
                 player.move(0)
-                player.rect.bottom = block.rect.top
+                player.rect.bottom = block.rect.topw
 
         transition_hit_list = pg.sprite.spritecollide(player, transition_list, False)
         for block in transition_hit_list:
-            player.transitionhit = True
+            if block.teleportto != 0:
+                print(block.rect.x, block.rect.y)
+                player.transitionhit = True
+                player.transitiontogoto = block.teleportto
+
+                print("Hit a transition block, transitiontogoto set to: ", player.transitiontogoto)
 
 
 class Level_01(Level):
@@ -405,6 +576,13 @@ class Level_01(Level):
                 if testprop != None:
                     if 'Transition' in testprop:
                         inside = Block(gameMap,x,y,x*50,y*50,2)
+                        print("Coordinates ", inside.rect.x, inside.rect.y)
+                        coordinates_of_teleports = [[800, 2600], [5000,5000], [1600, 2600], [5000,5000], [2850, 2650],
+                                                    [5000,5000], [1250, 2950], [5000,5000], [1900, 2850], [5000,5000],
+                                                    [2950, 2900]]
+                        for x in coordinates_of_teleports:
+                            if [inside.rect.x, inside.rect.y] == x:
+                                inside.teleportto = coordinates_of_teleports.index(x) + 1
                         transition_list.add(inside)
 
         oldman1 = Interactable('oldman1', 2000, 2000, 'civi1.png', 100, 1)

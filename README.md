@@ -25,7 +25,7 @@ After this is done, adding new (that should already be done) features will take 
 - Talking to NPCs
 - Save/Load
 - Inventory
-- Options (Show FPS, autosave)
+- Options (~~Show FPS~~ 22/12/2016, autosave)
 - etc
 
 
