@@ -74,9 +74,20 @@ class Interactable(NPC):
     change_y = 0
 
     directionAnimate = "R"
+    actualDirection = "R"
 
     controller = 0
     animater = 0
+    text_filename = ""
+
+    def talk(self, text_filename):
+        
+        self.text_filename = text_filename
+        self.script = open("Resources\\Scripts\\" + self.text_filename)
+        count = 0
+        for lines in self.script:
+            count += 1
+            self.NPC_talk = font_talk.ren
 
     ##    def talk(self, text_filename):
     ##
@@ -172,24 +183,28 @@ class Interactable(NPC):
         Nposy = self.rect.y + self.level.world_shift_y
 
         if self.directionAnimate == "R":
+            self.actualDirection = "R"
             if self.change_x == 0 and self.change_y == 0:
                 self.image = self.walking_frames_r[0]
             else:
                 self.image = self.walking_frames_r[self.animater]
 
         if self.directionAnimate == "L":
+            self.actualDirection = "L"
             if self.change_x == 0 and self.change_y == 0:
                 self.image = self.walking_frames_l[0]
             else:
                 self.image = self.walking_frames_l[self.animater]
 
         if self.directionAnimate == "U":
+            self.actualDirection = "U"
             if self.change_x == 0 and self.change_y == 0:
                 self.image = self.walking_frames_u[0]
             else:
                 self.image = self.walking_frames_u[self.animater]
 
         if self.directionAnimate == "D":
+            self.actualDirection = "D"
             if self.change_x == 0 and self.change_y == 0:
                 self.image = self.walking_frames_d[0]
             else:

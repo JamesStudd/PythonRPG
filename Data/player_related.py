@@ -25,6 +25,7 @@ class Player(pg.sprite.Sprite):
     inside = False
     transitionhit = False
     transitiontogoto = 0;
+    interact_button_hit = False
 
     def __init__(self, gender):
         super().__init__()  # Super class is pygame sprite
@@ -108,8 +109,22 @@ class Player(pg.sprite.Sprite):
             self.change_y = self.speed
             self.change_x = 0
             self.direction = "D"
+        elif key == 32:
+            self.interact_button_hit = True
+            self.check_npc_surrounding()
         if key == 0:
             self.change_x = 0
             self.change_y = 0
 
-
+    def check_npc_surrounding(self):
+        for Interactable in self.level.NPC_list:
+            #print(Interactable.actualDirection, " - ", self.direction)
+            # If the player is in a vicinity of 70 pixels from the NPC
+            if all((Interactable.rect.x >= self.rect.x - 70, Interactable.rect.x <= self.rect.x + 70,
+                    Interactable.rect.y >= self.rect.y - 70, Interactable.rect.y <= self.rect.y + 70)):
+            # If the player is facing the NPC
+                if ((Interactable.directionAnimate == "U" and self.direction == "D")
+                    or (Interactable.directionAnimate == "D" and self.direction == "U")
+                    or (Interactable.directionAnimate == "L" and self.direction == "R")
+                    or (Interactable.directionAnimate == "R" and self.direction == "L")):
+                    Interactable.talk("oldman1_talk")

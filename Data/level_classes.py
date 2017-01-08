@@ -576,7 +576,7 @@ class Level_01(Level):
                 if testprop != None:
                     if 'Transition' in testprop:
                         inside = Block(gameMap,x,y,x*50,y*50,2)
-                        print("Coordinates ", inside.rect.x, inside.rect.y)
+                        #print("Coordinates ", inside.rect.x, inside.rect.y)
                         coordinates_of_teleports = [[800, 2600], [5000,5000], [1600, 2600], [5000,5000], [2850, 2650],
                                                     [5000,5000], [1250, 2950], [5000,5000], [1900, 2850], [5000,5000],
                                                     [2950, 2900]]
