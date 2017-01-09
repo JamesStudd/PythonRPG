@@ -22,7 +22,7 @@ After this is done, adding new (that should already be done) features will take 
 
 - Pause Menu - Added a pause function for now 13/12/2016
 - ~~Entry into houses~~ Kind of - 12/12/2016, cleaned it up 13/12/2016
-- Talking to NPCs
+- ~~Talking to NPCs~~ - 09/01/2017
 - Save/Load
 - Inventory
 - Options (~~Show FPS~~ 22/12/2016, autosave)
