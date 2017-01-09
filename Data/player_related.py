@@ -122,9 +122,11 @@ class Player(pg.sprite.Sprite):
             # If the player is in a vicinity of 70 pixels from the NPC
             if all((Interactable.rect.x >= self.rect.x - 70, Interactable.rect.x <= self.rect.x + 70,
                     Interactable.rect.y >= self.rect.y - 70, Interactable.rect.y <= self.rect.y + 70)):
-            # If the player is facing the NPC
-                if ((Interactable.directionAnimate == "U" and self.direction == "D")
-                    or (Interactable.directionAnimate == "D" and self.direction == "U")
-                    or (Interactable.directionAnimate == "L" and self.direction == "R")
-                    or (Interactable.directionAnimate == "R" and self.direction == "L")):
-                    Interactable.talk("oldman1_talk")
+            # Make the NPC face the player
+                if self.direction == "D": Interactable.directionAnimate = "U"
+                elif self.direction == "L": Interactable.directionAnimate = "R"
+                elif self.direction == "R": Interactable.directionAnimate = "L"
+                elif self.direction == "U": Interactable.directionAnimate = "D"
+                Interactable.change_x = 0
+                Interactable.change_y = 0
+                Interactable.talk("oldman1_talk")

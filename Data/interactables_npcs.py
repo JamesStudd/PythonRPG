@@ -13,6 +13,9 @@ class NPC(pg.sprite.Sprite):
     walking_frames_u = []
     walking_frames_d = []
     walking_frames_r = []
+    talk_approved = False
+    talk_line = ""
+    talk_line_index_at = 1
 
     direction = {"R": [1, 0], "U": [0, -1], "D": [0, 1], "L": [-1, 0], "S": [0, 0]}
 
@@ -81,13 +84,18 @@ class Interactable(NPC):
     text_filename = ""
 
     def talk(self, text_filename):
-        
         self.text_filename = text_filename
-        self.script = open("Resources\\Scripts\\" + self.text_filename)
+        self.script = open("Resources\\Scripts\\" + self.text_filename + ".txt")
         count = 0
         for lines in self.script:
+            self.talk_approved = True
             count += 1
-            self.NPC_talk = font_talk.ren
+            if count == self.talk_line_index_at:
+                self.talk_line = return_talk_font().render(lines[0:len(lines) - 1], True, pg.Color("white"))
+        self.talk_line_index_at += 1
+        if self.talk_line_index_at == count + 1:
+            self.talk_line_index_at = 1
+        self.script.close()
 
     ##    def talk(self, text_filename):
     ##

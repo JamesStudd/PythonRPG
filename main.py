@@ -52,7 +52,6 @@ def main():
             player.level.update(player)
             for NPC in player.level.NPC_list:
                 NPC.update(player)
-
             if player.transitionhit == True:
                 if player.inside:
                     player.rect.x = player.level.exit_coord_x
@@ -82,6 +81,10 @@ def main():
         # --- DRAW
         player.level.draw(screen)
         active_sprite_list.draw(screen)
+        for NPC in player.level.NPC_list:
+            if NPC.talk_approved:
+                screen.blit(NPC.talk_line, (NPC.rect.x + 30, NPC.rect.y + 30))
+                # This just needs to be timed now (only on the screen for 5 seconds or so)
 
         if paused:
             text = paused_font.render("Paused", 1, (255, 255, 0))

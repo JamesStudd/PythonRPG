@@ -7,7 +7,6 @@ pg.init()
 
 def init():
     global screen, DIRECT_DICT, SCREEN_RECT
-
     DIRECT_DICT = {97 : (-1, 0),
                 100 : (1, 0),
                 119 : (0, -1),
@@ -51,6 +50,9 @@ def sort_player_spritesheet(animation, name):
     return array
 
 
+def return_talk_font():
+    font_talk = pg.font.SysFont("monospace", 20)
+    return font_talk
 
 def load_all_graphics(dirname):
     image_dict = {}
