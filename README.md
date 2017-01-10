@@ -31,6 +31,14 @@ After this is done, adding new (that should already be done) features will take 
 
 *****
 
+# Current Features
+This list will be the features currently in the game, as well as the date added.
+
+- Teleporting to inside houses 13/12/2016
+- Spritesheet loader using a consistent spritesheet style 10/12/2016
+- Talking to NPCs (using a text file containing the NPC's script) 09/01/2017
+- Minimap with moving player and NPC markers 10/01/2017
+
 # Prerequisites
 You'll need Python3.5+ installed as well as the modules **PyGame** and **PyTMX**. If either needs to be installed then follow the steps:
 

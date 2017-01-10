@@ -8,7 +8,8 @@ from Data.menu import Menu, char_create
 from Data.intro import Dialogue, show_intro
 from Data.pause_menu import draw_pause_menu
 from Data.timed_messages import timed_message
-from Data.UI import ui
+from Data.HUD import hud
+from Data.minimap import draw_minimap
 
 
 def main():
@@ -18,7 +19,7 @@ def main():
     #show_intro()
 
     player = char_create()
-    playerui = ui(player, "temp")
+    playerhud = hud(player)
 
     active_sprite_list = pg.sprite.Group()
     active_sprite_list.add(player)
@@ -92,22 +93,23 @@ def main():
                 tm = timed_message(screen, NPC.talk_line, NPC.rect.x + 30, NPC.rect.y + 30, 90)
                 list_of_timed_messages.append(tm)
                 NPC.talk_approved = False
-                playerui.update(NPC.talk_line)
                 # This just needs to be timed now (only on the screen for 5 seconds or so)
 
         for t in list_of_timed_messages:
             t.draw()
-
+            
         if paused:
             draw_pause_menu(screen)
 
         if display_fps == True:  # This will be cleaned up eventually
             text = display_font.render("FPS: "+(str(clock.get_fps())[0:2]), True, pg.Color("white"))
-            screen.blit(text, (400, 500))
+            screen.blit(text, (600, 210))
             text = display_font.render(str(player.rect.x - player.level.world_shift_x)+", "+str(player.rect.y - player.level.world_shift_y), True, pg.Color('white'))
-            screen.blit(text, (400, 530))
+            screen.blit(text, (600, 240))
 
-        playerui.draw(screen)
+        playerhud.draw(screen)
+        if not player.inside:
+            draw_minimap(screen, player)
 
         pg.display.flip()
         # --- END DRAW

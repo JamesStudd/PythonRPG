@@ -8,6 +8,8 @@ pg.init()
 class Player(pg.sprite.Sprite):
     """ My Main Player """
     speed = 10
+    health = 30
+    damage = 5
 
     change_x = 0
     change_y = 0
@@ -92,12 +94,18 @@ class Player(pg.sprite.Sprite):
             self.change_y = 0
 
     def move(self, key):
+        # Key - Values
+        # 97 - A
+        # 100 - D
+        # 119 - W
+        # 115 - S
+        # 32 - Spacebar
 
-        if key == 97:  # Key - Values
-            self.change_x = -self.speed  # 97      A
-            self.change_y = 0  # 100     D
-            self.direction = "L"  # 119     W
-        elif key == 100:  # 115     S
+        if key == 97:
+            self.change_x = -self.speed
+            self.change_y = 0 
+            self.direction = "L" 
+        elif key == 100:
             self.change_x = self.speed
             self.change_y = 0
             self.direction = "R"
@@ -129,4 +137,4 @@ class Player(pg.sprite.Sprite):
                 elif self.direction == "U": Interactable.directionAnimate = "D"
                 Interactable.change_x = 0
                 Interactable.change_y = 0
-                Interactable.talk("oldman1_talk")
+                Interactable.talk("oldman1_talk") # Temporary
