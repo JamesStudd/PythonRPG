@@ -6,6 +6,9 @@ from Data.player_related import *
 from Data.interactables_npcs import *
 from Data.menu import Menu, char_create
 from Data.intro import Dialogue, show_intro
+from Data.pause_menu import draw_pause_menu
+from Data.timed_messages import timed_message
+from Data.UI import ui
 
 
 def main():
@@ -15,6 +18,7 @@ def main():
     #show_intro()
 
     player = char_create()
+    playerui = ui(player, "temp")
 
     active_sprite_list = pg.sprite.Group()
     active_sprite_list.add(player)
@@ -25,6 +29,8 @@ def main():
     paused_font = pg.font.SysFont("monospace", 30)
     display_font = pg.font.SysFont("monospace", 20)
     display_fps = display_coords = False
+    list_of_timed_messages = []
+
 
     # This bit will eventually use threads, one for updating and one for rendering
     while True:
@@ -83,18 +89,25 @@ def main():
         active_sprite_list.draw(screen)
         for NPC in player.level.NPC_list:
             if NPC.talk_approved:
-                screen.blit(NPC.talk_line, (NPC.rect.x + 30, NPC.rect.y + 30))
+                tm = timed_message(screen, NPC.talk_line, NPC.rect.x + 30, NPC.rect.y + 30, 90)
+                list_of_timed_messages.append(tm)
+                NPC.talk_approved = False
+                playerui.update(NPC.talk_line)
                 # This just needs to be timed now (only on the screen for 5 seconds or so)
 
+        for t in list_of_timed_messages:
+            t.draw()
+
         if paused:
-            text = paused_font.render("Paused", 1, (255, 255, 0))
-            screen.blit(text, (340, 385))
+            draw_pause_menu(screen)
 
         if display_fps == True:  # This will be cleaned up eventually
             text = display_font.render("FPS: "+(str(clock.get_fps())[0:2]), True, pg.Color("white"))
             screen.blit(text, (400, 500))
             text = display_font.render(str(player.rect.x - player.level.world_shift_x)+", "+str(player.rect.y - player.level.world_shift_y), True, pg.Color('white'))
             screen.blit(text, (400, 530))
+
+        playerui.draw(screen)
 
         pg.display.flip()
         # --- END DRAW

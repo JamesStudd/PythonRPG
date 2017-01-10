@@ -97,6 +97,7 @@ class Interactable(NPC):
             self.talk_line_index_at = 1
         self.script.close()
 
+
     ##    def talk(self, text_filename):
     ##
     ##        if self.reward == False:
