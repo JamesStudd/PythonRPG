@@ -137,4 +137,5 @@ class Player(pg.sprite.Sprite):
                 elif self.direction == "U": Interactable.directionAnimate = "D"
                 Interactable.change_x = 0
                 Interactable.change_y = 0
-                Interactable.talk("oldman1_talk") # Temporary
+                if Interactable.timed_message_count == 90:
+                    Interactable.talk(Interactable.name + "_talk")

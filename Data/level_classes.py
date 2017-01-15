@@ -585,7 +585,7 @@ class Level_01(Level):
                                 inside.teleportto = coordinates_of_teleports.index(x) + 1
                         transition_list.add(inside)
 
-        oldman1 = Interactable('oldman1', 2000, 2000, 'civi1.png', 100, 1)
+        oldman1 = Interactable('oldman1', 2000, 2000, 'npc_civi_1.png', 100, 1)
         oldman1.level = self
         self.NPC_list.add(oldman1)
 

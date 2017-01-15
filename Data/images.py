@@ -50,6 +50,28 @@ def sort_player_spritesheet(animation, name):
     return array
 
 
+def sort_npc_spritesheet(animation, sheet):
+    sprite_sheet = SpriteSheet('Resources\\' + sheet)
+    array = []
+    walky = 0;
+    sizey = 51;
+    if animation == "up":
+        walky = 511
+    elif animation == "left":
+        walky = 574
+    elif animation == "down":
+        walky = 635
+        sizey = 54
+    elif animation == "right":
+        walky = 702
+
+    walkanimation = [0, 64, 128, 192, 256, 320, 384, 448, 512]
+
+    for x in range(0, 9):
+        image = sprite_sheet.get_image(walkanimation[x], walky, 30, sizey)
+        array.append(image)
+    return array
+
 def return_talk_font():
     font_talk = pg.font.SysFont("monospace", 20)
     return font_talk

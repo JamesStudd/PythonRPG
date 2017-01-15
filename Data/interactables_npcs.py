@@ -16,48 +16,18 @@ class NPC(pg.sprite.Sprite):
     talk_approved = False
     talk_line = ""
     talk_line_index_at = 1
+    surface = None
+    timed_message_count = 90
 
     direction = {"R": [1, 0], "U": [0, -1], "D": [0, 1], "L": [-1, 0], "S": [0, 0]}
 
     def __init__(self, name, x, y, sheet, health, damage):
         super().__init__()
 
-        sprite_sheet = SpriteSheet('Resources\\' + sheet)
-        image = sprite_sheet.get_image(0, 0, 32, 48)
-        self.walking_frames_d.append(image)
-        image = sprite_sheet.get_image(32, 0, 32, 48)
-        self.walking_frames_d.append(image)
-        image = sprite_sheet.get_image(64, 0, 32, 48)
-        self.walking_frames_d.append(image)
-        image = sprite_sheet.get_image(96, 0, 31, 48)
-        self.walking_frames_d.append(image)
-
-        image = sprite_sheet.get_image(0, 48, 32, 48)
-        self.walking_frames_l.append(image)
-        image = sprite_sheet.get_image(32, 48, 32, 48)
-        self.walking_frames_l.append(image)
-        image = sprite_sheet.get_image(64, 48, 32, 48)
-        self.walking_frames_l.append(image)
-        image = sprite_sheet.get_image(96, 48, 31, 48)
-        self.walking_frames_l.append(image)
-
-        image = sprite_sheet.get_image(0, 96, 32, 48)
-        self.walking_frames_r.append(image)
-        image = sprite_sheet.get_image(32, 96, 32, 48)
-        self.walking_frames_r.append(image)
-        image = sprite_sheet.get_image(64, 96, 32, 48)
-        self.walking_frames_r.append(image)
-        image = sprite_sheet.get_image(96, 96, 31, 48)
-        self.walking_frames_r.append(image)
-
-        image = sprite_sheet.get_image(0, 144, 32, 48)
-        self.walking_frames_u.append(image)
-        image = sprite_sheet.get_image(32, 144, 32, 48)
-        self.walking_frames_u.append(image)
-        image = sprite_sheet.get_image(64, 144, 32, 48)
-        self.walking_frames_u.append(image)
-        image = sprite_sheet.get_image(96, 144, 31, 48)
-        self.walking_frames_u.append(image)
+        self.walking_frames_l = sort_npc_spritesheet("left", sheet)
+        self.walking_frames_r = sort_npc_spritesheet("right", sheet)
+        self.walking_frames_u = sort_npc_spritesheet("up", sheet)
+        self.walking_frames_d = sort_npc_spritesheet("down", sheet)
 
         self.image = self.walking_frames_r[0]
         self.rect = self.image.get_rect()
@@ -97,19 +67,15 @@ class Interactable(NPC):
             self.talk_line_index_at = 1
         self.script.close()
 
-
-    ##    def talk(self, text_filename):
-    ##
-    ##        if self.reward == False:
-    ##            self.text_filename = text_filename
-    ##            self.script = open("Resources\\Scripts\\" + self.text_filename)
-    ##            count = 0
-    ##            for lines in self.script:
-    ##                count += 1
-    ##                if count == self.NPC_text_state:
-    ##                    self.NPC_talk = font_talk.render(lines[0:len(lines) - 1], True, pg.Color("white"))
-    ##            self.NPC_text_state_limit = count
-    ##            self.script.close()
+    def display_message(self, surface):
+        self.surface = surface
+        if self.talk_line != "":
+            if self.timed_message_count > 0:
+                self.surface.blit(self.talk_line, (self.rect.x - (self.talk_line.get_width() / 2 - 20), self.rect.y - 25))
+                self.timed_message_count -= 1
+            elif self.timed_message_count == 0:
+                self.talk_approved = False
+                self.timed_message_count = 90
     ##
     ##        if self.has_quest == True and self.reward == False:
     ##            self.quest_filename = self.name + "_quest" + ".txt"

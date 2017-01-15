@@ -6,7 +6,9 @@ pg.init()
 class RpgButton():
 
     clicked = False
-    x, y = 0
+    x = 0
+    y = 0
+    image = None
 
     def __init__(self, x, y):
         self.x = x
@@ -14,5 +16,8 @@ class RpgButton():
 
     def draw(self, surface, image):
         self.surface = surface
-        self.surface.blit(IMAGES[image], (self.x, self.y))
+        self.image = image
+        self.surface.blit(IMAGES[self.image], (self.x, self.y))
 
+    def update(self, pos):
+        print(pos)

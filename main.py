@@ -90,9 +90,9 @@ def main():
         active_sprite_list.draw(screen)
         for NPC in player.level.NPC_list:
             if NPC.talk_approved:
-                tm = timed_message(screen, NPC.talk_line, NPC.rect.x + 30, NPC.rect.y + 30, 90)
-                list_of_timed_messages.append(tm)
-                NPC.talk_approved = False
+                #tm = timed_message(screen, NPC.talk_line, NPC.rect.x + 30, NPC.rect.y + 30, 90)
+                #list_of_timed_messages.append(tm)
+                NPC.display_message(screen)
                 # This just needs to be timed now (only on the screen for 5 seconds or so)
 
         for t in list_of_timed_messages:

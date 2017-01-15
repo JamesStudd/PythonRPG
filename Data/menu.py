@@ -29,11 +29,6 @@ class Menu():
         image = sprite_sheet.get_image(0, 635, 30, 51)
         self.female = image
 
-        sprite_sheet = SpriteSheet('Resources\\bill.png')
-        image = sprite_sheet.get_image(64, 0, 32, 48)
-        image.set_colorkey(pg.Color('white'))
-        self.bill = image
-
     def draw(self, surface):
         self.surface = surface
         self.surface.blit(IMAGES[self.background], (0, 0))
